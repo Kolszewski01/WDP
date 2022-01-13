@@ -152,3 +152,158 @@ int main()
 	wypisz(podzielnosc(tab, 3));
 	wypisz(generuj(10, 10, 1));
 }
+
+
+ CHOINKA
+#include <iostream>
+
+using namespace std;
+
+void choinka(int n)
+{
+	for (int i = 1; i < 2*n + 2; i++)
+		cout << "#";
+	cout << endl;
+
+	for (int i = 1; i < n; i++)
+	{
+		cout << "# ";
+		for (int j = 0; j < n - 1 - i; j++)
+		{
+			cout << " ";
+		}
+
+		for (int j = 0; j < i * 2 - 1; j++)
+			cout << "*";
+
+		for (int j = 0; j < n - 1 - i; j++)
+		{
+			cout << " ";
+		}
+		cout << " #" << endl;
+	}
+
+	cout << "# ";
+	for (int g = 0; g < n - 3; g++)
+		cout << " ";
+	cout << "*";
+	for (int g = 0; g < n - 3; g++)
+		cout << " ";
+	cout << " #" << endl;
+	for (int i = 1; i < 2 * n + 2; i++)
+		cout << "#";
+	cout << endl;
+}
+
+int main()
+{
+	int n;
+
+	cin >> n;
+	choinka(n);
+
+	return 0;
+}
+
+
+
+VITO
+
+#include <iostream>
+#include <cmath>
+#include <vector>
+
+using namespace std;
+
+int sum_dom(vector<int> tab, int id)
+{
+	int w = 0;
+	for (int j = 0; j < tab.size(); j++)
+		if (tab[id] < tab[j])
+			w += tab[j] - tab[id];
+		else
+			w += tab[id] - tab[j];
+	return w;
+}
+
+int XD(vector<int> tab)
+{
+	int dom = tab[0], min , min_min = 0;
+
+	min = sum_dom(tab, 0);
+
+	for (int i = 0; i < tab.size(); i++)
+	{
+		min_min = sum_dom(tab, i);
+
+		if (min_min < min)
+		{
+			min = min_min;
+			dom = tab[i];
+		}
+	}
+	return dom;
+}
+
+void main()
+{
+	vector<int > tab = { 1,3,4,5,8,9,11 };
+	cout << XD(tab);
+}
+
+VITO v2
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void wypisz(int x)
+{
+	cout << x;
+}
+
+void wypisz(vector<int>tab)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		cout << tab[i]<<" ";
+	}
+}
+
+
+
+int ujemne(int x)
+{
+	if (x < 0)
+	{
+		return x * - 1;
+	}
+	return x;
+}
+
+int odleglosc(vector<int>tab, int index)
+{
+	int wynik = 0;
+
+	for (int i = 0; i < tab.size(); i++)
+	{
+		wynik += ujemne(tab[i] - tab[index]);
+	}
+	return wynik;
+}
+
+
+int main()
+{
+ 
+
+
+	vector<int>tab = { 1,3,4,5,8,9,11 };
+
+	wypisz(odleglosc(tab,5));
+
+
+}
+
