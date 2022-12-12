@@ -1,0 +1,158 @@
+
+#include <iostream>
+#include <vector>
+#include <random>
+
+using namespace std;
+
+void wypisz(int n)
+{
+    cout << n;
+}
+
+void wypisz(vector<int>tab)
+{
+    for (int i = 0; i < tab.size(); i++)
+    {
+        cout << tab[i] << " ";
+    }
+
+}
+
+int suma(vector<int>tab)
+{
+    int wynik = 0;
+    for (int i = 0; i < tab.size(); i++)
+    {
+        wynik += tab[i];
+    }
+    return wynik;
+}
+
+int max(vector<int>tab)
+{
+    int temp = tab[0];
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (temp < tab[i])
+        {
+            temp = tab[i];
+        }
+    }
+    return temp;
+}
+
+int index(vector<int>tab, int x)
+{
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (tab[i] == x)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool CzyNalezy(vector<int>tab, int a)
+{
+    return index(tab, a) > -1;
+}
+
+
+bool CzyZawiera(vector<int>tab, vector<int>x)
+{
+    for (int i = 0; i < x.size(); i++)
+    {
+        if (!CzyNalezy(tab, x[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+vector<int>unikalnosc(vector<int>tab)
+{
+    vector<int>x;
+    
+    for(int i=0; i<tab.size(); i++)
+    {
+        if (!CzyNalezy(x, tab[i]))
+        {
+            x.push_back(tab[i]);
+        }
+    }
+    return x;
+}
+
+
+vector<int> unikalnosc(vector<int>tab)
+{
+    vector<int>wynik;
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (!CzyNalezy(wynik, tab[i]))
+        {
+            wynik.push_back(tab[i]);
+        }
+    }
+    return wynik;
+}
+
+
+vector<int>podzielnosc(vector<int>tab, int dziel, int reszta = 0)
+{
+    vector<int>wynik;
+
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (tab[i] % dziel == reszta)
+        {
+            wynik.push_back(tab[i]);
+        }
+    }
+    return wynik;
+}
+
+
+vector<int>generuj(int a, int b)
+{
+    vector<int>wynik;
+
+    for (int i = 0; i < a; i++)
+    {
+        wynik.push_back(rand() % a);
+
+    }
+    return wynik;
+
+}
+
+
+
+int main()
+{
+
+    srand(time(NULL));
+    vector<int>tab = { 8,1,1,7,5,8,3 };
+    vector<int>tab2 = { 1,4 };
+    wypisz(unikalnosc(tab));
+    cout << "\n";
+    wypisz(suma(tab));
+    cout << "\n";
+    wypisz(max(tab));
+    cout << "\n";
+    wypisz(CzyNalezy(tab, 2));
+    cout << "\n";
+    wypisz(CzyZawiera(tab, tab2));
+}
+
+/*
+punkt 1. PRZYKŁAD! wymyślic przykład(do zadania wymyslec przykład)
+punkt 2. Sprawdzic czy przykład jest kompletny
+punkt 3. Sformalizowanie przykładu
+punkt 4. Nagłowek funkcji
+punkt 5. Ciało funkcji(jezeli zwraca cos innego niz void lub bool musimy zadeklarowac zmienna typu zwracanego funkcji)
+punkt 6. Nie wiesz co pisac? Wróć do przykładu
+*/
