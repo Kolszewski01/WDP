@@ -1,0 +1,236 @@
+
+#include <iostream>
+#include <vector>
+#include <string> ///do  konwertuj int
+#include <map>
+
+using namespace std;
+
+void wypisz (int a) {
+    cout << a;
+}
+
+void wypisz(vector<int>tab) {
+    for (int i = 0; i < tab.size(); i++) {
+        cout << " " << tab[i] << " ";
+    }
+}
+
+int max(vector<int>tab) {
+
+    int w = tab[0];
+
+    for (int i = 0; i < tab.size(); i++) {
+        if (tab[i] > w) {
+            w = tab[i];
+        }
+    }
+    return w;
+
+}
+
+int min(vector<int>tab) {
+
+    int w = tab[0];
+
+    for (int i = 0; i < tab.size(); i++) {
+        if (tab[i] < w) {
+            w = tab[i];
+        }
+    }
+    return w;
+}
+
+int index(vector<int>tab, int x) {
+
+    for (int i = 0; i < tab.size(); i++) {
+
+        if (tab[i] == x) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool czynalezy(vector<int>tab, int x) {
+    return index(tab, x) > -1;
+
+}
+
+bool czn(vector<int>tab, int x)
+{
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (x == tab[i])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool czz(vector<int>tab, vector<int>tab2)
+{
+    for (int i = 0; i < tab2.size(); i++)
+    {
+        if (!czn(tab, tab2[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool czypierwsza(int a) {
+    if (a < 2) {
+        return false;
+    }
+
+    for (int i = 2; i * i <= a; i++) {
+        if (a % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+
+
+
+int konwertuj_tab(vector<int>tab) {
+
+    int w = 0;
+
+    for (int i = 0; i < tab.size(); i++) {
+        int potega = tab.size() - 1 - i;
+        w += i * pow(10, potega);
+    }
+
+    return w;
+}
+
+
+vector<int>konwertu(int x) {
+
+    vector<int>tab;
+
+    while (x > 0) {
+        tab.push_back(x % 10);
+        x /= 10;
+    }
+
+    reverse(tab.begin(), tab.end());
+   
+    return tab;
+
+}
+
+vector<int>generuj(int n, int max, int min)
+{
+    vector<int>xd;
+
+    for (int i = 0; i < n; i++)
+    {
+        xd.push_back(rand() % (max - min) + min);
+    }
+    return xd;
+}
+
+map<char, int>ileliter(string a) {
+    map<char, int>x;
+    for (int i = 0; a.size(); i++) {
+        x[a[i]]++;
+    }
+    return x;
+}
+
+vector<int>unikalnosc(vector<int>tab)
+{
+    vector<int>w;
+
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (!czn(w, tab[i]))
+        {
+            w.push_back(tab[i]);
+        }
+    }
+    return w;
+}
+
+bool CNK(map<int, int>map, int x)
+{
+    for (auto i : map)
+    {
+        if (i.first == x)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+map<int, int>ILE(vector<int>tab)
+{
+    map<int, int>x;
+
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (!CNK(x, tab[i]))
+        {
+            x.insert({ tab[i],1 });
+        }
+        else
+        {
+            x[tab[i]]++;
+        }
+    }
+    return x;
+}
+
+int sumaCzesciowa(vector<int>tab)
+{
+    vector<int>wyniki;
+    int suma = 0;
+    for (int i = 0; i < tab.size(); i++)
+    {
+        for (int j = i; j < tab.size(); j++) {
+            suma += tab[j];
+            wyniki.push_back(suma);
+        }
+        suma = 0;
+    }
+    return max(wyniki);
+}
+
+void blizniaczeL_Pierwsze(int n)
+{
+    vector<int>tab;
+    for (int i = n + 1; tab.size() < 2; i++)
+    {
+        if (czypierwsza(i) && czypierwsza(i + 2))
+        {
+
+            tab.push_back(i);
+            tab.push_back(i + 2);
+        }
+    }
+    wypisz(tab);
+}
+
+int main()
+{
+ 
+
+    vector<int>a = { 1,2,3,4,5,6,7,8,55,4};
+    vector<int>b = { 1,2,3,4,5};
+    
+    wypisz(generuj(9,10,1));
+    
+
+
+
+}
+
